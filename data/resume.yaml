@@ -1,7 +1,7 @@
 contact:
   first_name: Jason
   last_name:  Hord
-  title:      Software Engineer II
+  title:      Software Engineer
   email:      jason.hord@gmail.com
   phone:      325-234-2010
   address:
@@ -18,9 +18,25 @@ contact:
 
 employments:
 
+- name:  American Express
+  title: Software Engineer (Contractor)
+  years: 2022 - Present
+  city:  Phoenix
+  state: AZ
+  keywords:
+  - Go
+  - Cassandra
+  - Kafka
+  - GraphQL
+  experience:
+  - Designed and published a GraphQL schema to provide data views and reports backed by a Cassandra cluster.
+  - Implemented business qualification logic in Go for a high-throughput ledgering system.
+  - Built Gherkin-based BDD tests to verify Kafka workflows for functional validation.
+  - Engaged with multiple teams across the organization to define requirements and resolve technical challenges.
+
 - name:  TournamentKings
   title: Software Engineer II
-  years: 2020 - Present
+  years: 2020 - 2022
   city:  Denver
   state: CO
   keywords:
