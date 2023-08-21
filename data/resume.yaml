@@ -13,13 +13,11 @@ contact:
   links:
   - name: 
     href: https://github.com/pravus
-  - name: 
-    href: https://gitlab.com/jhord
 
 employments:
 
 - name:  American Express
-  title: Software Engineer (Contractor)
+  title: Senior Software Engineer (Tech Lead)
   years: 2022 - Present
   city:  Phoenix
   state: AZ
@@ -29,10 +27,15 @@ employments:
   - Kafka
   - GraphQL
   experience:
-  - Designed and published a GraphQL schema to provide data views and reports backed by a Cassandra cluster.
-  - Implemented business qualification logic in Go for a high-throughput ledgering system.
-  - Built Gherkin-based BDD tests to verify Kafka workflows for functional validation.
-  - Engaged with multiple teams across the organization to define requirements and resolve technical challenges.
+  - Successfully launched a platform initiative handling over 10 million events per day which reduced processing time from 14 to 3 hours.
+  - Served as principal maintainer for a Merkel Search Tree backed high-throughput ledgering system.
+  - Redefined the platform Gherkin-based BDD regression suite for the Lounge Guest Access Policy (LGAP) initiative to ensure correctness and quality.
+  - Assisted with the development and maintenance of a YAML/Javascript-driven rules processing engine written in Go.
+  - Designed and published a GraphQL service to provide data views and reports backed by a Cassandra cluster.
+  - Acted as principal for design, technical, and operational decisions in a team of six with a focus on global initiatives.
+  - Regularly mentored and provided technical advice to team members across the organization.
+  - Created platform-wide documentation to socialize key concepts and methodologies used by external teams when building business logic.
+  - Participated in standard agile activities including daily stand-ups, sprint plans, retroactives, and demos.
 
 - name:  TournamentKings
   title: Software Engineer II
