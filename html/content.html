@@ -5,12 +5,106 @@
   <title>{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ .Stylesheet }}">
+  <style>
+    * {
+      margin:     0px;
+      padding:    0px;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: {{ .Style.Palette.Background }};
+      font:       normal 12pt helvetica, sans-serif;
+      padding:    1em 1em;
+      width:      100vw;
+      height:     100vh;
+    }
+
+    .col-container {
+      display: grid;
+      grid-template-columns: 25% 75%;
+      grid-template-areas: 'col-l' 'col-r';
+      height: 100%;
+    }
+
+    .col-l {
+      grid-area: col-l;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    .col-r {
+      grid-area: col-r;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    .contact .heading .name {
+      font-size: 2.00em;
+    }
+
+    .wtf {
+      test: {{ .Style.Palette.Hilite }};
+    }
+
+    .contact .heading .title {
+      color:     {{ .Style.Palette.Hilite }};
+      font-size: 1.25em;
+    }
+
+    .contact .content a {
+      color:           {{ .Style.Palette.Hilite }};
+      text-decoration: none;
+    }
+
+    .contact .content a:hover {
+      color: {{ .Style.Palette.Hilite }};
+    }
+
+    .contact .content a:visited {
+      color: {{ .Style.Palette.Hilite }};
+    }
+
+    .work-experience .heading {
+      font-size: 1.75em;
+    }
+
+    .work-experience .content .employer {
+      margin: 1em 0em;
+    }
+
+    .work-experience .content .employer .name {
+      font-size:   1.15em;
+      font-weight: bold;
+    }
+
+    .work-experience .content .employer .title {
+      font-weight: bold;
+    }
+
+    .work-experience .content .employer .experience ul {
+      padding: 0.5em 0em;
+    }
+
+    .work-experience .content .employer .experience li {
+      margin: 0.5em 2em;
+    }
+
+    .education .content .degree {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 <main>
 
-<section id="contact">
+<div class="col-container">
+<div class="col-l">
+<section class="contact">
   <div class="heading">
     <div class="name">{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }}</div>
     <div class="title">{{ .Resume.Contact.Title }}</div>
@@ -27,8 +121,10 @@
     </div>
   </div>
 </section>
+</div>
 
-<section id="work-experience">
+<div class="col-r">
+<section class="work-experience">
   <div class="heading">
     <div class="name">Work Experience</div>
   </div>
@@ -52,7 +148,7 @@
 </section>
 
 <!--
-<section id="skills">
+<section class="skills">
   <div class="heading">
     <div class="name">Skills</div>
   </div>
@@ -62,7 +158,7 @@
 </section>
 -->
 
-<section id="education">
+<section class="education">
   <div class="heading">
     <div class="name">Education</div>
   </div>
@@ -71,6 +167,8 @@
     <div class="dates">{{ .Resume.Education.Years }} {{ .Resume.Education.Status }}</div>
   </div>
 </section>
+</div>
+</div>
 
 </main>
 </body>

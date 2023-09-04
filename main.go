@@ -10,33 +10,15 @@ import (
 )
 
 const (
-	dataResume = `data/resume.yaml`
-
-	templateHtml = `html/content.html`
-	templateCss  = `html/content.css`
-	dataStyle    = `html/style.yaml`
-
-	outputHtml = `resume.html`
-	outputCss  = `resume.css`
+	yamlResume   = `data/resume.yaml`
+	htmlOutput   = `resume.html`
+	htmlStyle    = `html/style.yaml`
+	htmlTemplate = `html/content.html`
 )
 
 func main() {
-	var loader = yaml.NewLoader(dataResume)
-	var writer = html.NewWriter(&html.WriterConfiguration{
-		Output: &html.WriterFilePair{
-			Html: outputHtml,
-			Css:  outputCss,
-		},
-		Style: &html.WriterStyle{
-			FileName:   dataStyle,
-			Stylesheet: outputCss,
-		},
-		Template: &html.WriterFilePair{
-			Html: templateHtml,
-			Css:  templateCss,
-		},
-	})
-
+	var loader = yaml.NewLoader(yamlResume)
+	var writer = html.NewWriter(htmlOutput, htmlStyle, htmlTemplate)
 	if err := app.NewApp(&app.AppConfiguration{
 		Loader: loader,
 		Writer: writer,
