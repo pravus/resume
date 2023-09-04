@@ -6,6 +6,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* =========================================================================================================================
+      global
+    */
+
     * {
       margin:     0px;
       padding:    0px;
@@ -20,6 +24,10 @@
       max-width:  100%;
     }
 
+    /* =========================================================================================================================
+      container
+    */
+
     .col-container {
       display: grid;
       grid-template-columns: 20% 80%;
@@ -27,11 +35,14 @@
     }
 
     .col-l {
+      /* background:        rgba(194, 142, 14, 1.00); */
+      /* background:        rgba(218, 170, 0, 1.00); */
       grid-area:         col-l;
       grid-column-start: 1;
       grid-column-end:   2;
       grid-row-start:    1;
       grid-row-end:      2;
+      padding:           1em;
     }
 
     .col-r {
@@ -40,29 +51,57 @@
       grid-column-end:   3;
       grid-row-start:    1;
       grid-row-end:      2;
+      padding:           1em;
     }
 
+
+    /* =========================================================================================================================
+      contact
+    */
+
     .contact .heading .name {
-      font-size: 2.00em;
+      font-size:   2.00em;
+      font-weight: bold;
     }
 
     .contact .heading .title {
-      color:     rgba(255, 127, 80, 1.00);
+      /* color:     rgba(255, 127, 80, 1.00); */
+      /* color:     rgba(194, 142, 14, 1.00); */
+      /* color:     rgba(255, 207, 1, 1.00); */
       font-size: 1.25em;
     }
 
-    .contact .content a {
-      color:           rgba(255, 127, 80, 1.00);
+    .contact .address {
+      padding-top: 0.75em;
+    }
+
+    .contact .links {
+      padding-top: 0.75em;
+    }
+
+    .contact .links a {
+      /* color:           rgba(255, 127, 80, 1.00); */
+      /* color:           rgba(194, 142, 14, 1.00); */
+      /* color:           rgba(255, 207, 1, 1.00); */
       text-decoration: none;
     }
 
-    .contact .content a:hover {
-      color: rgba(255, 127, 80, 1.00);
+    .contact .links a:hover {
+      /* color: rgba(255, 127, 80, 1.00); */
+      /* color: rgba(194, 142, 14, 1.00); */
+      /* color: rgba(255, 207, 1, 1.00); */
     }
 
-    .contact .content a:visited {
-      color: rgba(255, 127, 80, 1.00);
+    .contact .links a:visited {
+      /* color: rgba(255, 127, 80, 1.00); */
+      /* color: rgba(194, 142, 14, 1.00); */
+      /* color: rgba(255, 207, 1, 1.00); */
     }
+
+
+    /* =========================================================================================================================
+      work experience
+    */
 
     .work-experience .heading {
       font-size: 1.75em;
@@ -89,6 +128,11 @@
       margin: 0.5em 2em;
     }
 
+
+    /* =========================================================================================================================
+      education
+    */
+
     .education .content .degree {
       font-weight: bold;
     }
@@ -104,15 +148,17 @@
     <div class="name">{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }}</div>
     <div class="title">{{ .Resume.Contact.Title }}</div>
   </div>
-  <div class="content">
+  <div class="address">
     <div>{{ .Resume.Contact.Address.Line1 }}</div>
     <div>{{ .Resume.Contact.Address.City }}, {{ .Resume.Contact.Address.State }} {{ .Resume.Contact.Address.ZipCode }}</div>
     <div>{{ .Resume.Contact.Phone }}</div>
+  </div>
+  <div class="links">
     <div class="email"><a href="mailto:{{ .Resume.Contact.Email }}">{{ .Resume.Contact.Email }}</a></div>
-    <div class="links">
-{{ range $index, $link := .Resume.Contact.Links -}}
-    {{ "    " }}<div class="link"><a href="{{ $link.Href }}">{{ if ne $link.Name "" }}{{ $link.Name }}{{ else }}{{ $link.Href }}{{ end }}</a></div>
-{{ end -}}
+    <div class="http">
+{{- range $index, $link := .Resume.Contact.Links }}
+      <div class="link"><a href="{{ $link.Href }}">{{ if ne $link.Name "" }}{{ $link.Name }}{{ else }}{{ $link.Href }}{{ end }}</a></div>
+{{- end }}
     </div>
   </div>
 </section>
@@ -124,7 +170,7 @@
     <div class="name">Work Experience</div>
   </div>
   <div class="content">
-{{ range $index, $employment := .Resume.Employments }}
+{{- range $index, $employment := .Resume.Employments }}
     <div class="employer">
       <div class="name">{{ $employment.Name }}</div>
       <div class="title">{{ $employment.Title }}</div>
@@ -132,13 +178,13 @@
       <div class="keywords">{{ range $index, $keyword := $employment.Keywords }}{{ if $index }}, {{ end }}{{ $keyword }}{{ end }}</div>
       <div class="experience">
         <ul>
-{{   range $index, $item := $employment.Experience -}}
-{{ "            " }}<li>{{ $item }}</li>
-{{   end -}}
-{{ "        " }}</ul>
+{{-   range $index, $item := $employment.Experience }}
+          <li>{{ $item }}</li>
+{{-   end }}
+        </ul>
       </div>
     </div>
-{{ end }}
+{{- end }}
   </div>
 </section>
 
