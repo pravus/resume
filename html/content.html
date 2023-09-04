@@ -12,61 +12,56 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      background: {{ .Style.Palette.Background }};
+    html, body, main {
+      background: rgba(255, 255, 255, 1.00);
       font:       normal 12pt helvetica, sans-serif;
-      padding:    1em 1em;
       width:      100vw;
       height:     100vh;
+      max-width:  100%;
     }
 
     .col-container {
       display: grid;
-      grid-template-columns: 25% 75%;
+      grid-template-columns: 20% 80%;
       grid-template-areas: 'col-l' 'col-r';
-      height: 100%;
     }
 
     .col-l {
-      grid-area: col-l;
+      grid-area:         col-l;
       grid-column-start: 1;
-      grid-column-end: 2;
-      grid-row-start: 1;
-      grid-row-end: 2;
+      grid-column-end:   2;
+      grid-row-start:    1;
+      grid-row-end:      2;
     }
 
     .col-r {
-      grid-area: col-r;
+      grid-area:         col-r;
       grid-column-start: 2;
-      grid-column-end: 3;
-      grid-row-start: 1;
-      grid-row-end: 2;
+      grid-column-end:   3;
+      grid-row-start:    1;
+      grid-row-end:      2;
     }
 
     .contact .heading .name {
       font-size: 2.00em;
     }
 
-    .wtf {
-      test: {{ .Style.Palette.Hilite }};
-    }
-
     .contact .heading .title {
-      color:     {{ .Style.Palette.Hilite }};
+      color:     rgba(255, 127, 80, 1.00);
       font-size: 1.25em;
     }
 
     .contact .content a {
-      color:           {{ .Style.Palette.Hilite }};
+      color:           rgba(255, 127, 80, 1.00);
       text-decoration: none;
     }
 
     .contact .content a:hover {
-      color: {{ .Style.Palette.Hilite }};
+      color: rgba(255, 127, 80, 1.00);
     }
 
     .contact .content a:visited {
-      color: {{ .Style.Palette.Hilite }};
+      color: rgba(255, 127, 80, 1.00);
     }
 
     .work-experience .heading {

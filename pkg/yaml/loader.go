@@ -10,22 +10,24 @@ import (
 
 const (
 	ErrorCodeYamlDecode    app.ErrorCode = `YamlDecode`
-	ErrorCodeYamlFileOpen                = `YamlFileOpen`
-	ErrorCodeYamlFileClose               = `YamlFileClose`
+	ErrorCodeYamlFileOpen  app.ErrorCode = `YamlFileOpen`
+	ErrorCodeYamlFileClose app.ErrorCode = `YamlFileClose`
 )
 
 type Loader struct {
 	fileName string
 }
 
-func NewLoader(fileName string) *Loader {
-	var loader = &Loader{
+var _ app.Loader = (*Loader)(nil)
+
+func NewLoader(fileName string) Loader {
+	var loader = Loader{
 		fileName: fileName,
 	}
 	return loader
 }
 
-func (loader *Loader) Load() (*app.Resume, app.Error) {
+func (loader Loader) Load() (*app.Resume, app.Error) {
 	var resume *app.Resume
 	if file, err := os.Open(loader.fileName); err != nil {
 		return nil, app.NewError(ErrorCodeYamlFileOpen, err)

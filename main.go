@@ -12,13 +12,12 @@ import (
 const (
 	yamlResume   = `data/resume.yaml`
 	htmlOutput   = `resume.html`
-	htmlStyle    = `html/style.yaml`
 	htmlTemplate = `html/content.html`
 )
 
 func main() {
 	var loader = yaml.NewLoader(yamlResume)
-	var writer = html.NewWriter(htmlOutput, htmlStyle, htmlTemplate)
+	var writer = html.NewWriter(htmlOutput, htmlTemplate)
 	if err := app.NewApp(&app.AppConfiguration{
 		Loader: loader,
 		Writer: writer,
