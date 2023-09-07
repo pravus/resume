@@ -1,4 +1,4 @@
-package app
+package model
 
 type Error interface {
 	error
@@ -12,6 +12,8 @@ type _error struct {
 	code  ErrorCode
 	cause error
 }
+
+var _ Error = (*_error)(nil)
 
 func NewError(code ErrorCode, cause error) *_error {
 	var err = &_error{

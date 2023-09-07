@@ -1,4 +1,4 @@
-package app
+package model
 
 type Resume struct {
 	Contact struct {
