@@ -1,5 +1,9 @@
 package model
 
+import (
+	"io"
+)
+
 type Writer interface {
-	Write(*Resume) Error
+	Write(io.Writer, *Resume) Error
 }

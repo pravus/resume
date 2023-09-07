@@ -1,6 +1,8 @@
 package app
 
 import (
+	"os"
+
 	"resume/internal/model"
 )
 
@@ -30,7 +32,7 @@ func NewApp(deps *Dependencies) *App {
 func (app *App) MangéLaTête() model.Error {
 	if resume, err := app.loader.Load(); err != nil {
 		return model.NewError(ErrorCodeAppResumeLoad, err)
-	} else if err := app.writer.Write(resume); err != nil {
+	} else if err := app.writer.Write(os.Stdout, resume); err != nil {
 		return model.NewError(ErrorCodeAppResumeWrite, err)
 	} else {
 		return nil

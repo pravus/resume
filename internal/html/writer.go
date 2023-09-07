@@ -1,48 +1,50 @@
 package html
 
 import (
+	"bytes"
+	"fmt"
 	"html/template"
-	"os"
+	"io"
 
 	"resume/internal/model"
 )
 
 const (
-	ErrorCodeHtmlOutputFileOpen  model.ErrorCode = `HtmlOutputFileOpen`
-	ErrorCodeHtmlOutputFileClose model.ErrorCode = `HtmlOutputFileClose`
 	ErrorCodeHtmlTemplateParse   model.ErrorCode = `HtmlTemplateParse`
 	ErrorCodeHtmlTemplateExecute model.ErrorCode = `HtmlTemplateExecute`
+	ErrorCodeHtmlWrite           model.ErrorCode = `HtmlWrite`
 )
 
 type Writer struct {
-	output   string
 	template string
 }
 
 var _ model.Writer = (*Writer)(nil)
 
-func NewWriter(output, template string) Writer {
+func NewWriter(template string) Writer {
 	var writer = Writer{
-		output:   output,
 		template: template,
 	}
 	return writer
 }
 
-func (writer Writer) Write(resume *model.Resume) model.Error {
+func (writer Writer) Write(w io.Writer, resume *model.Resume) model.Error {
 	var data = &struct {
 		Resume *model.Resume
 	}{
 		Resume: resume,
 	}
+	body := bytes.NewBuffer([]byte{})
 	if mold, err := template.ParseFiles(writer.template); err != nil {
 		return model.NewError(ErrorCodeHtmlTemplateParse, err)
-	} else if file, err := os.Create(writer.output); err != nil {
-		return model.NewError(ErrorCodeHtmlOutputFileOpen, err)
-	} else if err := mold.Execute(file, data); err != nil {
+	} else if err := mold.Execute(body, data); err != nil {
 		return model.NewError(ErrorCodeHtmlTemplateExecute, err)
-	} else if err := file.Close(); err != nil {
-		return model.NewError(ErrorCodeHtmlOutputFileClose, err)
+	} else if size := int64(body.Len()); size <= 0 {
+		return model.NewError(ErrorCodeHtmlTemplateExecute, fmt.Errorf(`template output empty`))
+	} else if count, err := io.Copy(w, body); err != nil {
+		return model.NewError(ErrorCodeHtmlWrite, err)
+	} else if count != size {
+		return model.NewError(ErrorCodeHtmlWrite, fmt.Errorf(`expected to write %d bytes but wrote %d`, size, count))
 	}
 	return nil
 }

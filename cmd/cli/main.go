@@ -11,9 +11,8 @@ import (
 )
 
 const (
-	yamlResume   = `data/resume.yaml`
-	htmlOutput   = `resume.html`
-	htmlTemplate = `html/content.html`
+	resume   = `data/resume.yaml`
+	template = `html/content.html`
 )
 
 type flags struct {
@@ -39,19 +38,19 @@ func main() {
 
 	// loader
 	{
-		loader := yaml.NewLoader(_prefix(yamlResume))
+		loader := yaml.NewLoader(_prefix(resume))
 		deps.Loader = loader
 	}
 
 	// writer
 	{
-		writer := html.NewWriter(htmlOutput, _prefix(htmlTemplate))
+		writer := html.NewWriter(_prefix(template))
 		deps.Writer = writer
 	}
 
 	// main
 	if err := app.NewApp(deps).MangéLaTête(); err != nil {
-		fmt.Println(err.Error())
+		fmt.Fprintln(os.Stdout, err.Error())
 		os.Exit(1)
 	}
 }
