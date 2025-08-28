@@ -26,7 +26,11 @@ employments:
   - Cassandra
   - Kafka
   - GraphQL
+  - gRPC
+  - Spanner
+  - BigTable
   experience:
+  - Lead the development and operation of a flawless large data migration encompassing 56 million objects, 380 billion rows, and 80TB of data with a total runtime of 22 hours.
   - Successfully launched a platform initiative handling over 10 million events per day which reduced processing time from 14 to 3 hours.
   - Served as principal maintainer for a Merkel Search Tree backed high-throughput ledgering system.
   - Redefined the platform Gherkin-based BDD regression suite for the Lounge Guest Access Policy (LGAP) initiative to ensure correctness and quality.
