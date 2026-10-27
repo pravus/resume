@@ -29,7 +29,10 @@ employments:
   - gRPC
   - Spanner
   - BigTable
+  - BigQuery
+  - Dataflow
   experience:
+  - Architected and built a multi-stage analytics Apache Beam pipeline running on Dataflow to certify 120 million SOR objects into BigQuery.
   - Lead the development and operation of a flawless large data migration encompassing 56 million objects, 380 billion rows, and 80TB of data with a total runtime of 22 hours.
   - Successfully launched a platform initiative handling over 10 million events per day which reduced processing time from 14 to 3 hours.
   - Served as principal maintainer for a Merkel Search Tree backed high-throughput ledgering system.
