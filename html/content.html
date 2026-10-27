@@ -1,216 +1,125 @@
 <!doctype html>
-
-<html>
+<html lang="en">
 <head>
-  <title>{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }}</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }} — {{ .Resume.Contact.Title }}">
+  <title>{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }} | Resume</title>
   <style>
-    /* =========================================================================================================================
-      global
-    */
-
-    * {
-      margin:     0px;
-      padding:    0px;
-      box-sizing: border-box;
+    :root {
+      --ink: #17212b;
+      --muted: #526170;
+      --accent: #155e75;
+      --rule: #d7e0e5;
+      --paper: #fff;
+      --wash: #f3f7f9;
     }
-
-    html, body, main {
-      background: rgba(255, 255, 255, 1.00);
-      font:       normal 12pt helvetica, sans-serif;
-      width:      100vw;
-      height:     100vh;
-      max-width:  100%;
+    * { box-sizing: border-box; }
+    html { background: #e9eef1; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 10pt/1.45 "Inter", "Aptos", "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-
-    /* =========================================================================================================================
-      container
-    */
-
-    .col-container {
-      display: grid;
-      grid-template-columns: 20% 80%;
-      grid-template-areas: 'col-l' 'col-r';
+    a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+    a:hover { text-decoration: underline; }
+    .page { max-width: 1100px; margin: 28px auto; background: var(--paper); box-shadow: 0 8px 32px #14212b18; }
+    .masthead { padding: 34px 42px 26px; border-bottom: 3px solid var(--accent); }
+    h1 { margin: 0; font-size: 29pt; line-height: 1.05; letter-spacing: -.035em; }
+    .headline { margin-top: 8px; color: var(--accent); font-size: 13pt; font-weight: 600; }
+    .contact-line { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 14px; color: var(--muted); }
+    .layout { display: grid; grid-template-columns: minmax(205px, 0.7fr) minmax(0, 1.8fr); }
+    aside { padding: 27px 26px 36px 42px; background: var(--wash); }
+    main { min-width: 0; padding: 27px 42px 36px 30px; }
+    section { margin: 0 0 25px; }
+    h2 { margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); color: var(--accent); font-size: 11pt; text-transform: uppercase; letter-spacing: .09em; }
+    h3 { margin: 0; font-size: 11pt; line-height: 1.3; }
+    .job { margin: 0 0 23px; break-inside: avoid-page; }
+    .job-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 3px 12px; }
+    .role { margin-top: 2px; font-weight: 600; }
+    .meta { color: var(--muted); font-size: 9pt; }
+    .keywords { margin-top: 5px; color: var(--accent); font-size: 8.5pt; }
+    ul { margin: 8px 0 0; padding-left: 17px; }
+    li { margin: 0 0 5px; padding-left: 2px; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 5px; list-style: none; padding: 0; margin: 0; }
+    .skill-list li { margin: 0; padding: 3px 7px; border: 1px solid #c8d7de; border-radius: 3px; font-size: 8.5pt; }
+    .education-degree { font-weight: 700; }
+    .minor { color: var(--muted); }
+    @media (max-width: 700px) {
+      .page { margin: 0; box-shadow: none; }
+      .masthead { padding: 28px 22px 22px; }
+      .layout { grid-template-columns: 1fr; }
+      aside, main { padding: 24px 22px; }
+      h1 { font-size: 25pt; }
     }
-
-    .col-l {
-      /* background:        rgba(194, 142, 14, 1.00); */
-      /* background:        rgba(218, 170, 0, 1.00); */
-      grid-area:         col-l;
-      grid-column-start: 1;
-      grid-column-end:   2;
-      grid-row-start:    1;
-      grid-row-end:      2;
-      padding:           1em;
-    }
-
-    .col-r {
-      grid-area:         col-r;
-      grid-column-start: 2;
-      grid-column-end:   3;
-      grid-row-start:    1;
-      grid-row-end:      2;
-      padding:           1em;
-    }
-
-
-    /* =========================================================================================================================
-      contact
-    */
-
-    .contact .heading .name {
-      font-size:   2.00em;
-      font-weight: bold;
-    }
-
-    .contact .heading .title {
-      /* color:     rgba(255, 127, 80, 1.00); */
-      /* color:     rgba(194, 142, 14, 1.00); */
-      /* color:     rgba(255, 207, 1, 1.00); */
-      font-size: 1.25em;
-    }
-
-    .contact .address {
-      padding-top: 0.75em;
-    }
-
-    .contact .links {
-      padding-top: 0.75em;
-    }
-
-    .contact .links a {
-      /* color:           rgba(255, 127, 80, 1.00); */
-      /* color:           rgba(194, 142, 14, 1.00); */
-      /* color:           rgba(255, 207, 1, 1.00); */
-      text-decoration: none;
-    }
-
-    .contact .links a:hover {
-      /* color: rgba(255, 127, 80, 1.00); */
-      /* color: rgba(194, 142, 14, 1.00); */
-      /* color: rgba(255, 207, 1, 1.00); */
-    }
-
-    .contact .links a:visited {
-      /* color: rgba(255, 127, 80, 1.00); */
-      /* color: rgba(194, 142, 14, 1.00); */
-      /* color: rgba(255, 207, 1, 1.00); */
-    }
-
-
-    /* =========================================================================================================================
-      work experience
-    */
-
-    .work-experience .heading {
-      font-size: 1.75em;
-    }
-
-    .work-experience .content .employer {
-      margin: 1em 0em;
-    }
-
-    .work-experience .content .employer .name {
-      font-size:   1.15em;
-      font-weight: bold;
-    }
-
-    .work-experience .content .employer .title {
-      font-weight: bold;
-    }
-
-    .work-experience .content .employer .experience ul {
-      padding: 0.5em 0em;
-    }
-
-    .work-experience .content .employer .experience li {
-      margin: 0.5em 2em;
-    }
-
-
-    /* =========================================================================================================================
-      education
-    */
-
-    .education .content .degree {
-      font-weight: bold;
+    @page { size: Letter; margin: 0.55in 0.55in 0.6in; }
+    @media print {
+      html, body { background: #fff; }
+      body { font-size: 9pt; line-height: 1.35; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page { max-width: none; margin: 0; box-shadow: none; }
+      .masthead { padding: 0 0 14px; }
+      h1 { font-size: 24pt; }
+      .layout { grid-template-columns: 1fr 2.6fr; }
+      aside { padding: 18px 16px 0 0; background: #fff; }
+      main { padding: 18px 0 0 20px; }
+      section { margin-bottom: 17px; }
+      .job { margin-bottom: 16px; }
+      a { color: inherit; }
+      a[href^="mailto:"] { overflow-wrap: anywhere; }
+      h2, h3 { break-after: avoid-page; }
+      li { orphans: 2; widows: 2; }
     }
   </style>
 </head>
 <body>
-<main>
-
-<div class="col-container">
-<div class="col-l">
-<section class="contact">
-  <div class="heading">
-    <div class="name">{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }}</div>
-    <div class="title">{{ .Resume.Contact.Title }}</div>
-  </div>
-  <div class="address">
-    <div>{{ .Resume.Contact.Address.Line1 }}</div>
-    <div>{{ .Resume.Contact.Address.City }}, {{ .Resume.Contact.Address.State }} {{ .Resume.Contact.Address.ZipCode }}</div>
-    <div>{{ .Resume.Contact.Phone }}</div>
-  </div>
-  <div class="links">
-    <div class="email"><a href="mailto:{{ .Resume.Contact.Email }}">{{ .Resume.Contact.Email }}</a></div>
-    <div class="http">
-{{- range $index, $link := .Resume.Contact.Links }}
-      <div class="link"><a href="{{ $link.Href }}">{{ if ne $link.Name "" }}{{ $link.Name }}{{ else }}{{ $link.Href }}{{ end }}</a></div>
-{{- end }}
+<div class="page">
+  <header class="masthead">
+    <h1>{{ .Resume.Contact.FirstName }} {{ .Resume.Contact.LastName }}</h1>
+    <div class="headline">{{ .Resume.Contact.Title }}</div>
+    <div class="contact-line">
+      {{ if .Resume.Contact.Email }}<span><a href="mailto:{{ .Resume.Contact.Email }}">{{ .Resume.Contact.Email }}</a></span>{{ end }}
+      {{ if .Resume.Contact.Phone }}<span>{{ .Resume.Contact.Phone }}</span>{{ end }}
+      {{ with .Resume.Contact.Address }}{{ if or .City .State }}<span>{{ .City }}{{ if and .City .State }}, {{ end }}{{ .State }}</span>{{ end }}{{ end }}
+      {{ range .Resume.Contact.Links }}<span><a href="{{ .Href }}">{{ if .Name }}{{ .Name }}{{ else }}{{ .Href }}{{ end }}</a></span>{{ end }}
     </div>
-  </div>
-</section>
-</div>
-
-<div class="col-r">
-<section class="work-experience">
-  <div class="heading">
-    <div class="name">Work Experience</div>
-  </div>
-  <div class="content">
-{{- range $index, $employment := .Resume.Employments }}
-    <div class="employer">
-      <div class="name">{{ $employment.Name }}</div>
-      <div class="title">{{ $employment.Title }}</div>
-      <div class="dates">{{ $employment.Years }}, {{ $employment.City }}, {{ $employment.State }}</div>
-      <div class="keywords">{{ range $index, $keyword := $employment.Keywords }}{{ if $index }}, {{ end }}{{ $keyword }}{{ end }}</div>
-      <div class="experience">
-        <ul>
-{{-   range $index, $item := $employment.Experience }}
-          <li>{{ $item }}</li>
-{{-   end }}
+  </header>
+  <div class="layout">
+    <aside>
+      <section>
+        <h2>Technical Skills</h2>
+        <ul class="skill-list">
+          {{ range .Resume.Skills }}<li>{{ . }}</li>{{ end }}
         </ul>
-      </div>
-    </div>
-{{- end }}
+      </section>
+      <section>
+        <h2>Education</h2>
+        <div class="education-degree">{{ .Resume.Education.Degree }} {{ .Resume.Education.Major }}</div>
+        <div>{{ .Resume.Education.Institution }}</div>
+        <div class="meta">{{ .Resume.Education.Years }}{{ if .Resume.Education.Status }} · {{ .Resume.Education.Status }}{{ end }}</div>
+        {{ if .Resume.Education.Minor }}<div class="minor">Minor: {{ .Resume.Education.Minor }}</div>{{ end }}
+      </section>
+    </aside>
+    <main>
+      <section>
+        <h2>Professional Experience</h2>
+        {{ range .Resume.Employments }}
+        <article class="job">
+          <div class="job-head">
+            <h3>{{ .Name }}</h3>
+            <div class="meta">{{ .Years }}</div>
+          </div>
+          <div class="role">{{ .Title }}</div>
+          {{ if or .City .State }}<div class="meta">{{ .City }}{{ if and .City .State }}, {{ end }}{{ .State }}</div>{{ end }}
+          {{ if .Keywords }}<div class="keywords">{{ range $i, $keyword := .Keywords }}{{ if $i }} · {{ end }}{{ $keyword }}{{ end }}</div>{{ end }}
+          {{ if .Experience }}<ul>{{ range .Experience }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+        </article>
+        {{ end }}
+      </section>
+    </main>
   </div>
-</section>
-
-<!--
-<section class="skills">
-  <div class="heading">
-    <div class="name">Skills</div>
-  </div>
-  <div class="content">
-    <div>{{ range $index, $skill := .Resume.Skills }}{{ if $index }}, {{ end }}{{ $skill }}{{ end }}</div>
-  </div>
-</section>
--->
-
-<section class="education">
-  <div class="heading">
-    <div class="name">Education</div>
-  </div>
-  <div class="content">
-    <div class="degree">{{ .Resume.Education.Degree }} {{ .Resume.Education.Major }}, {{ .Resume.Education.Institution }}</div>
-    <div class="dates">{{ .Resume.Education.Years }} {{ .Resume.Education.Status }}</div>
-  </div>
-</section>
 </div>
-</div>
-
-</main>
 </body>
 </html>

@@ -16,7 +16,7 @@ contact:
 
 employments:
 
-- name:  American Express
+- name: American Express
   title: Senior Software Engineer (Tech Lead)
   years: 2022 - Present
   city:  Phoenix
@@ -32,19 +32,19 @@ employments:
   - BigQuery
   - Dataflow
   experience:
-  - Architected and built a multi-stage analytics Apache Beam pipeline running on Dataflow to certify 120 million SOR objects into BigQuery.
-  - Lead the development and operation of a flawless large data migration encompassing 56 million objects, 380 billion rows, and 80TB of data with a total runtime of 22 hours.
-  - Successfully launched a platform initiative handling over 10 million events per day which reduced processing time from 14 to 3 hours.
-  - Served as principal maintainer for a Merkel Search Tree backed high-throughput ledgering system.
+  - Architected and built a multi-stage Apache Beam analytics pipeline on Google Cloud Dataflow, certifying 120 million SOR objects into BigQuery.
+  - Led development and execution of a large-scale data migration covering 56 million objects, 380 billion rows, and 80 TB, completing the migration in 22 hours.
+  - Launched a platform initiative processing more than 10 million events per day, reducing processing time from 14 hours to 3 hours.
+  - Served as principal maintainer of a high-throughput ledgering system backed by a Merkle search tree.
   - Redefined the platform Gherkin-based BDD regression suite for the Lounge Guest Access Policy (LGAP) initiative to ensure correctness and quality.
-  - Assisted with the development and maintenance of a YAML/Javascript-driven rules processing engine written in Go.
+  - Contributed to the development and maintenance of a Go rules engine driven by YAML and JavaScript.
   - Designed and published a GraphQL service to provide data views and reports backed by a Cassandra cluster.
-  - Acted as principal for design, technical, and operational decisions in a team of six with a focus on global initiatives.
-  - Regularly mentored and provided technical advice to team members across the organization.
+  - Guided design, technical, and operational decisions for a six-person team delivering global initiatives.
+  - Mentored engineers and provided technical guidance across the organization.
   - Created platform-wide documentation to socialize key concepts and methodologies used by external teams when building business logic.
-  - Participated in standard agile activities including daily stand-ups, sprint plans, retroactives, and demos.
+  - Participated in agile ceremonies, including stand-ups, sprint planning, retrospectives, and demonstrations.
 
-- name:  TournamentKings
+- name: TournamentKings
   title: Software Engineer II
   years: 2020 - 2022
   city:  Denver
@@ -56,16 +56,16 @@ employments:
   - Serverless
   - PostgreSQL
   experience:
-  - Built bots to facilitate core product offerings using the Discord interactions, gateway, and REST APIs in Go.
-  - Developed metrics harvesting and reporting software to meet the business' need for Discord audience analytics.
-  - Responsible for architecting database tables, functions, and triggers in PostgreSQL to meet persistence requirements.
+  - Built Go-based bots supporting core product features through Discord’s interactions, Gateway, and REST APIs.
+  - Built metrics collection and reporting software for Discord audience analytics.
+  - Designed PostgreSQL tables, functions, and triggers to support application persistence requirements.
   - Integrated PayPal and Authorize.Net payment processing workflows into the customer billing platform.
   - Deployed applications to AWS using Lambda serverless functions and Docker containers running on EC2 instances.
   - Performed technical due diligence evaluations related to company acquisitions.
   - Provided support and direction to other members of the engineering team.
   - Participated in team development workflows including daily stand-ups, code reviews, and product demonstrations/hand-offs.
 
-- name:  FluentStream
+- name: FluentStream
   title: Engineer II
   years: 2017 - 2020
   city:  Denver
@@ -81,19 +81,19 @@ employments:
   - Linux
   - DevOps
   experience:
-  - Refactored internal Caller ID Name (CNAM) service from PHP to Go reducing API server load by 50% and eliminating service timeouts.
-  - Debugged and refactored Go and Node.js projects for a busy event pipeline and state aggregator to reduce CPU load, memory consumption, and on-the-wire JSON providing higher service uptime and better performance for client-facing consumers.
-  - Designed, built, and deployed a host service adapter in Go using NSQ and Docker to automate common Asterisk maintenance tasks significantly reducing engineering intervention to ensure service stability.
+  - Migrated the internal Caller ID Name (CNAM) service from PHP to Go, reducing API server load by 50% and eliminating service timeouts.
+  - Optimized Go and Node.js event-pipeline and state-aggregator services, reducing CPU and memory use and JSON payload sizes while improving uptime and client-facing performance.
+  - Built and deployed a Go host-service adapter using NSQ and Docker to automate routine Asterisk maintenance and reduce manual engineering intervention.
   - Developed Go microservices for production Kubernetes clusters including deployments, services, configmaps, and secrets to coordinate ingress networking, pod management, and safe credential storage.
   - Rebuilt platform voicemail service using Python and the Asterisk ARI to achieve company goals of migrating all recordings and static media to Google Cloud Storage.
   - Updated call interfaces and logic to MySQL and MongoDB databases for the platform API to support migrating from PHP 5.4 to 5.7 with zero downtime.
   - Analyzed crash dumps and error logs to develop patches for business critical applications with source contributions to Asterisk, ProxySQL, and AmiGo.
   - Migrated active MongoDB cluster from version 2.4 to 3.6 to meet requirements for TLS/authentication and mitigate end-of-life support concerns.
   - Assisted developer efforts by creating services, API documentation, and scripts to facilitate dev and test environment build-outs utilizing Vagrant and GitLab/GitHub workflows.
-  - Utilized SaltStack to automate deployment and configuration tasks on a fleet of over 150 servers running Debian, Ubuntu, and CentOS Linux in cloud providers including DigitalOcean, Linode, Rackspace, Vultr, Google, and AWS.
+  - Automated deployment and configuration with SaltStack across 150+ Debian, Ubuntu, and CentOS servers hosted on DigitalOcean, Linode, Rackspace, Vultr, Google Cloud, and AWS.
   - Automated platform build workflow utilizing Docker and GitHub to quickly deploy standardized, versioned, and stable images running custom Asterisk installations with support tooling for configuration and diagnostics.
   - Migrated multiple distributed MySQL/Tungsten database clusters to Amazon RDS providing higher service resilience and eliminating maintenance workloads.
-  - Created AWS ImageBuilder recipes and pipelines to build custom AMI images for media server deployment reducing new installation stand-up to less than 5 minutes.
+  - Created AWS Image Builder recipes and pipelines for custom media-server AMIs, reducing new-environment provisioning to under five minutes.
   - Responsible for creating and implementing Nagios/NRPE service checks and configuring ElasticSearch, Logstash, Kibana, and Grafana to provide systems monitoring, alerts, and activity dashboards enabling faster outage responsiveness in both operations and engineering.
   - Provided day-to-day support to operations staff and business leadership in the form of reports, platform tools, and technical documentation empowering team members to make the best decisions for clients.
 
@@ -112,11 +112,11 @@ employments:
   - Oracle
   - Enterprise
   experience:
-  - Programmed fully automated identity management system maintaining system account life-cycle for an active campus of over 6,000 students.
+  - Built an automated identity-management system for account lifecycle operations across a campus of more than 6,000 students.
   - Developed and deployed authenticated web services to automate Active Directory object changes via LDAP, Oracle database updates using packages, procedures, and triggers, and filesystem ACL/ACE modifications using platform APIs.
   - Built customer service support tools to assist with identity and access issues such as lost or expired passwords and password resets.
   - Refactored Ellucian Banner Pro*C and PL/SQL programs for regulatory compliance and additional features as requested by functional staff to meet organizational goals.
-  - Implemented single-sign-on to campus resources and federated services through Shibboleth, CAS, and custom built connectors in Perl allowing access to campus web resources through Ellucian Luminis.
+  - Implemented single sign-on and federation using Shibboleth, CAS, and custom Perl connectors, enabling access to campus resources through Ellucian Luminis.
   - Provided expertise and PHP programming to facilitate the implementation of the LiveWhale CMS for managing the Angelo State University website.
   - Collaborated with team members to implement version control (SVN, Mercurial) for tracking and documenting modifications to Ellucian Banner, Luminis, and in-house applications, jobs, and reports.
   - Created ETL workflow using Informatica Cloud and Salesforce.com enabling university retention and recruitment efforts.

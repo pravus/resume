@@ -41,7 +41,7 @@ func main() {
 	{
 		loader := yaml.NewLoader(_prefix(data))
 		if value, err := loader.Load(); err != nil {
-			fmt.Fprintln(os.Stdout, err.Error())
+			fmt.Fprintln(os.Stderr, err.Error())
 			os.Exit(1)
 		} else {
 			resume = value
@@ -55,10 +55,19 @@ func main() {
 	server := http.Server{
 		Addr: *flags.http,
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			w.WriteHeader(http.StatusOK)
+			if r.Method != http.MethodGet && r.Method != http.MethodHead {
+				w.Header().Set("Allow", "GET, HEAD")
+				http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+				return
+			}
+			w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			if r.Method == http.MethodHead {
+				w.WriteHeader(http.StatusOK)
+				return
+			}
 			if err := writer.Write(w, resume); err != nil {
-				fmt.Println(err.Error())
-				http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+				fmt.Fprintln(os.Stderr, err.Error())
+				// Headers may already be committed if the client disconnects during write.
 			}
 		}),
 	}
@@ -66,7 +75,7 @@ func main() {
 	// main
 	fmt.Println(`http.up ` + *flags.http)
 	if err := server.ListenAndServe(); err != nil {
-		fmt.Fprintln(os.Stdout, err.Error())
+		fmt.Fprintln(os.Stderr, err.Error())
 		os.Exit(1)
 	}
 }

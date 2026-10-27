@@ -5,46 +5,43 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"os"
 
 	"resume/internal/model"
 )
 
 const (
-	ErrorCodeHtmlTemplateParse   model.ErrorCode = `HtmlTemplateParse`
-	ErrorCodeHtmlTemplateExecute model.ErrorCode = `HtmlTemplateExecute`
-	ErrorCodeHtmlWrite           model.ErrorCode = `HtmlWrite`
+	ErrorCodeHtmlTemplateParse   model.ErrorCode = "HtmlTemplateParse"
+	ErrorCodeHtmlTemplateExecute model.ErrorCode = "HtmlTemplateExecute"
+	ErrorCodeHtmlWrite           model.ErrorCode = "HtmlWrite"
 )
 
-type Writer struct {
-	template string
-}
+type Writer struct{ templatePath string }
 
-var _ model.Writer = (*Writer)(nil)
+var _ model.Writer = Writer{}
 
-func NewWriter(template string) Writer {
-	var writer = Writer{
-		template: template,
+func NewWriter(templatePath string) Writer { return Writer{templatePath: templatePath} }
+
+func (writer Writer) Write(dst io.Writer, resume *model.Resume) model.Error {
+	source, err := os.ReadFile(writer.templatePath)
+	if err != nil {
+		return model.NewError(ErrorCodeHtmlTemplateParse, fmt.Errorf("%s: %w", writer.templatePath, err))
 	}
-	return writer
-}
-
-func (writer Writer) Write(w io.Writer, resume *model.Resume) model.Error {
-	var data = &struct {
-		Resume *model.Resume
-	}{
-		Resume: resume,
-	}
-	body := bytes.NewBuffer([]byte{})
-	if mold, err := template.ParseFiles(writer.template); err != nil {
+	tmpl, err := template.New("resume").Parse(string(source))
+	if err != nil {
 		return model.NewError(ErrorCodeHtmlTemplateParse, err)
-	} else if err := mold.Execute(body, data); err != nil {
+	}
+
+	// Render before writing so a template execution error cannot leave partial HTML.
+	var rendered bytes.Buffer
+	if err := tmpl.Execute(&rendered, struct{ Resume *model.Resume }{Resume: resume}); err != nil {
 		return model.NewError(ErrorCodeHtmlTemplateExecute, err)
-	} else if size := int64(body.Len()); size <= 0 {
-		return model.NewError(ErrorCodeHtmlTemplateExecute, fmt.Errorf(`template output empty`))
-	} else if count, err := io.Copy(w, body); err != nil {
+	}
+	if rendered.Len() == 0 {
+		return model.NewError(ErrorCodeHtmlTemplateExecute, fmt.Errorf("template output is empty"))
+	}
+	if _, err := io.Copy(dst, &rendered); err != nil {
 		return model.NewError(ErrorCodeHtmlWrite, err)
-	} else if count != size {
-		return model.NewError(ErrorCodeHtmlWrite, fmt.Errorf(`expected to write %d bytes but wrote %d`, size, count))
 	}
 	return nil
 }

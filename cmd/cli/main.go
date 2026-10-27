@@ -34,7 +34,7 @@ func main() {
 	}
 
 	// dependencies
-	deps := &app.Dependencies{}
+	deps := app.Dependencies{Output: os.Stdout}
 
 	// loader
 	{
@@ -49,8 +49,8 @@ func main() {
 	}
 
 	// main
-	if err := app.NewApp(deps).MangéLaTête(); err != nil {
-		fmt.Fprintln(os.Stdout, err.Error())
+	if err := app.NewApp(deps).Run(); err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
 		os.Exit(1)
 	}
 }
